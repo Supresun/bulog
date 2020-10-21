@@ -1,0 +1,226 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>大数据安全学习笔记（一） | Vine&#39;s Notes</title>
+
+<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1603254961349">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.mhao.life/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Vine&#39;s Notes
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://dh.mhao.life" class="menu gt-a-link" target="_blank">
+                            网址导航
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1603254961349" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    大数据安全学习笔记（一）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-10-20 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <!-- more -->
+<h4 id="大数据利弊">大数据利弊</h4>
+<p><strong>防</strong>：</p>
+<ol>
+<li>增大隐私泄露危险：
+<ol>
+<li>个人角度：用户的数据具有累积性和关联性</li>
+<li>企业、政府：大数据安全标准体系不完善，大数据所有权和使用权分离</li>
+<li>基础技术角度：Handhoop、NoSQL等本身存在安全隐患</li>
+</ol>
+</li>
+<li>现有存储和安防措施有待改进</li>
+<li>为信息安全提供新支撑，海量数据有助于更好刻画网络异常行为。</li>
+</ol>
+<p><strong>攻</strong>：</p>
+<ol>
+<li>大数据被应用于攻击手段。黑客可能获取更多有用信息。可能利用大数据发起“僵尸网络攻击”等</li>
+<li>大数据成为高级可持续攻击（APT）的载体。黑客可将攻击隐藏在大数据中。黑客设置的任何一个会误导安全厂商目标信息提取和检索的攻击，都会导致安全检测偏离应有的方向。</li>
+</ol>
+<h4 id="大数据安全防护技术">大数据安全防护技术</h4>
+<p><strong>1.数据发布匿名保护技术</strong><br>
+<strong>2.社交网络匿名保护技术</strong></p>
+<ul>
+<li>用户标识匿名与属性匿名保护</li>
+<li>用户间关系匿名保护</li>
+</ul>
+<p><strong>3.数据水印技术</strong></p>
+<ul>
+<li>鲁棒数字水印
+<ul>
+<li>可用于大数据起源证明</li>
+<li>主要用在数字作品中标识著作权信息</li>
+</ul>
+</li>
+<li>易损数字水印
+<ul>
+<li>可用于证明数据的真实性</li>
+<li>主要用于完整性保护，当内容改变时，这些水印信息会发生相应的改变。</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.数据溯源技术</strong></p>
+<ul>
+<li>标注法
+<ul>
+<li>用标注的方式来记录原始数据的一些重要信息</li>
+<li>只适合小型系统</li>
+</ul>
+</li>
+<li>反向查询法
+<ul>
+<li>逆向查询，在需要时才计算</li>
+<li>追踪简单，只需存储少量元数据就可实现对数据的溯源</li>
+<li>缺点需要提供逆置函数和相对应的验证函数，实现起来比较复杂</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.访问控制技术</strong></p>
+<ul>
+<li>基于角色的访问控制</li>
+<li>基于属性的访问控制</li>
+<li>风险自适应的访问控制</li>
+</ul>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.mhao.life/post/hello-gridea/" class="post-title gt-a-link">
+                    Hello Gridea
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <a href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备20011177号</a>
+&nbsp;<a href="https://github.com/getgridea/gridea" target="_blank">Powered by Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://blog.mhao.life/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
