@@ -1,0 +1,268 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>初识可信计算 | Vine&#39;s Notes</title>
+<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1603337955047">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.mhao.life/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="初识可信计算 | Vine&#39;s Notes - Atom Feed" href="https://blog.mhao.life/atom.xml">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="可信计算简介
+
+背景：随着恶意代码攻击威胁加强，设法从体系架构上建立恶意代码攻击免疫机制
+目标：通过建立一种特定的完整性度量机制，使计算平台运行时具备分辨可信程序代码与不可信程序代码的能力，从而对不可信的程序代码建立有效的防治方法和措施。
+..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://blog.mhao.life">
+  <img class="avatar" src="https://blog.mhao.life/images/avatar.png?v=1603337955047" alt="">
+  </a>
+  <h1 class="site-title">
+    Vine&#39;s Notes
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+      
+        <a href="https://dh.mhao.life" class="menu" target="_blank">
+          网址导航
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              初识可信计算
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-10-22
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h4 id="可信计算简介">可信计算简介</h4>
+<ul>
+<li><strong>背景</strong>：随着恶意代码攻击威胁加强，设法从体系架构上建立恶意代码攻击免疫机制</li>
+<li><strong>目标</strong>：通过建立一种特定的完整性度量机制，使计算平台运行时具备分辨可信程序代码与不可信程序代码的能力，从而对不可信的程序代码建立有效的防治方法和措施。<img src="http://img.mhao.life/20201022104622.png" alt="" loading="lazy"></li>
+<li><strong>宗旨</strong>：以可信计算安全芯片为核心改进现有平台体系结构，增强通用计算平台和网络的可信性</li>
+<li><strong>定义</strong>：
+<ul>
+<li>ISO/IEC将可信定义为：参与计算的组件、操作或过程在任意的条件下是可预测的，并能够抵御病毒和一定程序的物理干扰</li>
+<li>IEEE给出的可信定义为：是指计算机系统所提供的服务是可以论证其是可信赖的</li>
+<li>TCG用实体行为的预期性来定义可信: 一个实体是可信的，如果它的行为总是以预期的方式达到预期的目标。TCG的可信计算思路是通过在硬件平台上引入可信平台模块TPM来提高计算机系统的安全性，这种技术思路目前得到了产业界的普遍认同</li>
+<li>沈昌祥等人认为可信是指以安全芯片为基础，建立可信的计算环境，确保系统实体按照预期的行为执行。</li>
+</ul>
+</li>
+<li><strong>基本思想</strong>：先在计算机系统中建立一个信任根，再建立一条信任链，逐级扩展到整个计算机系统。<img src="http://img.mhao.life/20201022105653.png" alt="" loading="lazy"></li>
+<li><strong>关键技术</strong>：
+<ul>
+<li>信任根，一个基于密码学和物理保护的可靠的信任源头（如TPM/TCM)
+<ul>
+<li>TPM（是一种SOC芯片，由CPU、存储器、I/O、密码协处理器、随机数产生器和嵌入 式操作系统等部件组成。完成可信度量的存储、可信度量的报告、密钥产生、加密和签名、数据安全存储等功能</li>
+</ul>
+</li>
+<li>信任链</li>
+<li>可信测量、存储、报告机制</li>
+</ul>
+</li>
+<li>-<strong>支撑软件</strong>：TSS
+<ul>
+<li>TSS（TCG software stack）是TPM的支撑软件，主要作用是为操作系统和应用软件提供使用TPM的接口</li>
+<li>其结构可分为内核层、系统服务层和用户程序层
+<ul>
+<li>内核层的核心软件是可信设备驱动TDD 模块，它是直接驱动TPM 的软件模块，由其嵌入式操作系统所确定</li>
+<li>系统服务层的核心软件是可信设备驱动库TDDL 和可信计算核心服务模块TCS，其中TDDL 提供用户模式下的接口，TCS 对平台上的所有应用提供一组通用的服务</li>
+<li>用户程序层的核心软件是可信服务提供模块TSP。TSP给应用提供的最高层的API 函数，使应用程序可以方便地使用TPM<img src="http://img.mhao.life/20201022111331.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="可信计算相关技术">可信计算相关技术</h4>
+<ul>
+<li>Intel TXT技术
+<ul>
+<li>定义：可信执行技术（Trusted Execution Technology，TXT）是Intel公司研发的一项新的安全技术平台，通过使用高级的TXT模块芯片， 配合支持Intel vPro技术的主机板芯片组以及虚拟机软件，协助保护系统重要数据并避免其受到攻击</li>
+<li>信任根：支持TXT技术的Intel CPU</li>
+<li>信任链：
+<ul>
+<li>静态信任链（Static Chain of Trust）：度量平台配置</li>
+<li>动态信任链（Dynamic Chain of Trust）：度量系统软件、软件配置及策略<br>
+<img src="http://img.mhao.life/20201022111829.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ARM TrustZone技术
+<ul>
+<li>软硬件结合</li>
+<li>硬件：将单个物理处理器包含两个虚拟处理器核：安全处理器核和普通处理器核<img src="http://img.mhao.life/20201022112148.png" alt="" loading="lazy"></li>
+<li>软件：普通操作系统（Rich OS，ROS）与安全操作系统（Trusted OS，TOS）分离
+<ul>
+<li>安全启动流程：
+<ul>
+<li>设备上电复位后，安全引导程序从SoC的ROM 中运行</li>
+<li>引导程序将首先进入TEE初始化阶段并启动TOS</li>
+<li>逐级核查TOS启动过程中的各个阶段的关键代码以保证TOS的完整性，防止未授权或受恶意篡改的软件的运行</li>
+<li>运行REE的引导程序并启动ROS，至此完成整个系统的安全引导过程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AMD SP技术
+<ul>
+<li>AMD-SP是AMD64的集成协处理器，利用TrustZone 技术将CPU 分为两个虚拟区域来打造安全环境，敏感任务运行在PSP（安全区域）上，其他任务在普通模式下运行</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97%E7%AE%80%E4%BB%8B">可信计算简介</a></li>
+<li><a href="#%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF">可信计算相关技术</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://blog.mhao.life/post/da-shu-ju-an-quan-xue-xi-bi-ji-yi/">
+              <h3 class="post-title">
+                大数据安全学习笔记（一）
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  <a href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备20011177号</a>
+&nbsp;<a href="https://github.com/getgridea/gridea" target="_blank">Powered by Gridea</a>
+  <a class="rss" href="https://blog.mhao.life/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
