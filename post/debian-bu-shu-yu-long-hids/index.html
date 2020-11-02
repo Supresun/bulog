@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Debian部署驭龙HIDS | Vine&#39;s Notes</title>
-<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1604287298720">
+<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1604316723907">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.mhao.life/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Debian部署驭龙HIDS | Vine&#39;s Notes - Atom Feed" href="https://blog.mhao.life/atom.xml">
@@ -28,7 +28,7 @@ $./mongod --dbpat..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://blog.mhao.life">
-  <img class="avatar" src="https://blog.mhao.life/images/avatar.png?v=1604287298720" alt="">
+  <img class="avatar" src="https://blog.mhao.life/images/avatar.png?v=1604316723907" alt="">
   </a>
   <h1 class="site-title">
     Vine&#39;s Notes
@@ -94,7 +94,7 @@ $./mongod --dbpat..." />
                 2020-11-02
               </span>
               <span>
-                5 min read
+                6 min read
               </span>
               
             </div>
@@ -120,7 +120,7 @@ $./mongod --dbpat..." />
 </code></pre>
 <p><strong>2.部署Elasticsearch(5.x，驭龙暂不兼容6.x版本)</strong></p>
 <ol>
-<li>安装Open jre,jdk</li>
+<li>安装Open jre、jdk</li>
 </ol>
 <pre><code>java -version
 sudo apt install default-jre
@@ -182,53 +182,61 @@ su - 是完整的切换到一个用户环境</li>
 </blockquote>
 <p><strong>3.编译</strong></p>
 <ol>
-<li>修改源码/yulong-hids/web/conf/app.conf<br>
-3个地方:
-<ol>
-<li>管理密码 passwordhex 是密码的32位MD5值</li>
-<li>TwoFactorAuthKey 是开启二次验证</li>
-<li>mongodb ip:port 修改为 MongoDB 之前 bind 的 ip:27017，ES修改为ES实例的 ip:9200，ip不对会导致web面板报错</li>
+<li>手动安装go<a href="https://github.com/golang/go/wiki/Ubuntu">详细教程</a></li>
 </ol>
-</li>
-<li>安装go<a href="https://github.com/golang/go/wiki/Ubuntu">详细教程</a></li>
-</ol>
-<pre><code>go version
+<pre><code>// 下载并解压
+wget https://dl.google.com/go/go1.10.linux-amd64.tar.gz &amp;&amp; tar -zxvf go1.10.linux-amd64.tar.gz -C /usr/local/
+//设置环境变量
+sudo vi /etc/profile 
+// 并在尾部添加下面的内容：
+export GOROOT=/usr/local/go
+export GOBIN=$GOROOT/bin
+export PATH=$PATH:$GOBIN
+export GOPATH=$HOME/go (可选设置)
 
-[Ubuntu 18.04 LTS or 20.04 LTS]
-sudo add-apt-repository ppa:longsleep/golang-backports
-sudo apt update
-sudo apt install golang-go
+// 重新加载 profile 文件
+source /etc/profile
 
 </code></pre>
-<ol start="3">
+<ol start="2">
 <li>依赖</li>
 </ol>
 <blockquote>
 <p>Go依赖包都集成在相应工程的vendor目录中<br>
-编译Agent需要先安装libpcap-devel</p>
+编译Agent需要先安装libpcap-devel<br>
+<code>sudo apt-get install libpcap-dev</code></p>
 </blockquote>
-<ol start="3">
+<ol start="4">
 <li>编译客户端（Agent，Daemon、依赖）</li>
 </ol>
-<pre><code>git clone https://github.com/ysrc/yulong-hids/
-
-// 编译agent
+<pre><code>//下载源代码到go目录的src文件夹下(并修改相应文件)
+cd /usr/local/go/src
+git clone https://github.com/ysrc/yulong-hids/
+</code></pre>
+<blockquote>
+<p>修改源码yulong-hids/web/conf/app.conf<br>
+3个地方:<br>
+1.    管理密码 passwordhex 是密码的32位MD5值<br>
+2.    TwoFactorAuthKey 是开启二次验证<br>
+3.    mongodb ip:port 修改为 MongoDB 之前 bind 的 ip:27017，ES修改为ES实例的 ip:9200(默认127.0.0.1)，ip不对会导致web面板报错</p>
+</blockquote>
+<pre><code>// 编译agent(注意路径!)
 go build -o yulong-hids/bin/linux-64/agent --ldflags=&quot;-w -s&quot; yulong-hids/agent/agent.go
 
 // 编译daemon
 go build -o yulong-hids/bin/linux-64/daemon --ldflags=&quot;-w -s&quot; yulong-hids/daemon/daemon.go
 </code></pre>
 <blockquote>
-<p>在build目录下运行 python3 build.py 就能编译并打包。<br>
+<p>在build目录下运行 <strong>python3 build.py</strong> 就能一键编译并打包，该脚本会在 bin 目录下生成一个 build 文件夹。<br>
 但是由于data.zip中提供的依赖文件不一定适配，可能需要你自行编译（见步骤5)，所以这个文件需要手动打包进最终的部署包。</p>
 </blockquote>
-<ol start="4">
+<ol start="5">
 <li>服务端（Server、Web）</li>
 </ol>
 <pre><code>go build -o yulong-hids/bin/server --ldflags=&quot;-w -s&quot; yulong-hids/server/server.go
 go build -o yulong-hids/web/web --ldflags=&quot;-w -s&quot; yulong-hids/web/main.go
 </code></pre>
-<ol start="5">
+<ol start="6">
 <li>内核、驱动</li>
 </ol>
 <blockquote>
@@ -243,6 +251,26 @@ cd yulong-hids/syscall_hook
 make
 </code></pre>
 <p>编译好的内核和驱动需要替换进对应系统目录下的data.zip内(eg:yulong-hids/bin/linux-64,yulong-hids/bin/win32,yulong-hids/bin/win64)。</p>
+<p><strong>4.部署</strong></p>
+<ol>
+<li>编译好的包上传到/home中，并解压到/home/yulong-hids中</li>
+<li><code>chmod 755 server web/web</code></li>
+<li>启动web</li>
+</ol>
+<pre><code>cd web
+./web
+ss -antpl
+</code></pre>
+<ol start="4">
+<li>启动server</li>
+</ol>
+<pre><code>./server -db 192.168.58.138:27017 -es 127.0.0.1:9200
+ss -antpl//查看33433端口是否开启
+</code></pre>
+<ol start="5">
+<li>访问web</li>
+<li>部署agent和守护进行</li>
+</ol>
 
               </div>
               <div class="toc-container">
