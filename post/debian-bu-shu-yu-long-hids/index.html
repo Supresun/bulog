@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Debian部署驭龙HIDS | Vine&#39;s Notes</title>
-<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1604329624451">
+<link rel="shortcut icon" href="https://blog.mhao.life/favicon.ico?v=1605281031166">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.mhao.life/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Debian部署驭龙HIDS | Vine&#39;s Notes - Atom Feed" href="https://blog.mhao.life/atom.xml">
@@ -28,7 +28,7 @@ $./mongo..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://blog.mhao.life">
-  <img class="avatar" src="https://blog.mhao.life/images/avatar.png?v=1604329624451" alt="">
+  <img class="avatar" src="https://blog.mhao.life/images/avatar.png?v=1605281031166" alt="">
   </a>
   <h1 class="site-title">
     Vine&#39;s Notes
@@ -182,7 +182,7 @@ su - 是完整的切换到一个用户环境</li>
 </blockquote>
 <p><strong>3.编译</strong></p>
 <ol>
-<li>手动安装go<a href="https://github.com/golang/go/wiki/Ubuntu">详细教程</a></li>
+<li>手动安装go</li>
 </ol>
 <pre><code>// 下载并解压
 wget https://mirrors.ustc.edu.cn/golang/go1.10.linux-amd64.tar.gz &amp;&amp; tar -zxvf go1.10.linux-amd64.tar.gz -C /usr/local/
@@ -198,7 +198,7 @@ export GOPATH=$HOME/go (可选设置)
 source /etc/profile
 
 </code></pre>
-<ol start="2">
+<ol>
 <li>依赖</li>
 </ol>
 <blockquote>
@@ -206,7 +206,7 @@ source /etc/profile
 编译Agent需要先安装libpcap-devel<br>
 <code>sudo apt-get install libpcap-dev</code></p>
 </blockquote>
-<ol start="4">
+<ol>
 <li>编译客户端（Agent，Daemon、依赖）</li>
 </ol>
 <pre><code>//下载源代码到go目录的src文件夹下(并修改相应文件)
@@ -230,13 +230,13 @@ go build -o yulong-hids/bin/linux-64/daemon --ldflags=&quot;-w -s&quot; yulong-h
 <p>在build目录下运行 <strong>python3 build.py</strong> 就能一键编译并打包，该脚本会在 bin 目录下生成一个 build 文件夹。<br>
 但是由于data.zip中提供的依赖文件不一定适配，可能需要你自行编译（见步骤5)，所以这个文件需要手动打包进最终的部署包。</p>
 </blockquote>
-<ol start="5">
+<ol>
 <li>服务端（Server、Web）</li>
 </ol>
 <pre><code>go build -o yulong-hids/bin/server --ldflags=&quot;-w -s&quot; yulong-hids/server/server.go
 go build -o yulong-hids/web/web --ldflags=&quot;-w -s&quot; yulong-hids/web/main.go
 </code></pre>
-<ol start="6">
+<ol>
 <li>内核、驱动</li>
 </ol>
 <blockquote>
@@ -264,13 +264,13 @@ ss -antpl
 openssl x509 -in cert.pem -out server.crt
 openssl rsa -in private.pem -out server.key
 </code></pre>
-<ol start="4">
+<ol>
 <li>启动server</li>
 </ol>
 <pre><code>./server -db 192.168.58.138:27017 -es 127.0.0.1:9200
 ss -antpl//查看33433端口是否开启
 </code></pre>
-<ol start="5">
+<ol>
 <li>访问web</li>
 <li>部署agent和守护进行</li>
 </ol>
